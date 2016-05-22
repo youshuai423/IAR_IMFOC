@@ -1,0 +1,64 @@
+/*******************************************************************************
+*
+* Copyright 2007-2015 Freescale Semiconductor, Inc.
+*
+* This software is owned or controlled by Freescale Semiconductor.
+* Use of this software is governed by the Freescale License
+* distributed with this Material.
+* See the LICENSE file distributed for more details.
+* 
+*
+****************************************************************************//*!
+*
+* @brief  Multiply subtract of four inputs with rounding
+* 
+*******************************************************************************/
+#ifndef _MLIB_MSU4RND_F16_ASM_H_
+#define _MLIB_MSU4RND_F16_ASM_H_
+
+
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/*******************************************************************************
+* Includes
+*******************************************************************************/
+#include "mlib_types.h"
+
+/*******************************************************************************
+* Macros
+*******************************************************************************/  
+#define MLIB_Msu4RndSat_F16_Asmi(f16MinMul1, f16MinMul2, f16SubMul1, f16SubMul2) MLIB_Msu4RndSat_F16_FAsmi(f16MinMul1, f16MinMul2, f16SubMul1, f16SubMul2)
+  
+/***************************************************************************//*!
+*
+* f16Out = (f16MinMul1 * f16MinMul2) - (f16SubMul1 * f16SubMul2)
+* With saturation
+*******************************************************************************/
+static inline frac16_t MLIB_Msu4RndSat_F16_FAsmi(register frac16_t f16MinMul1, register frac16_t f16MinMul2, register frac16_t f16SubMul1, register frac16_t f16SubMul2)
+{
+    #if defined(__CC_ARM)                                            /* For ARM Compiler */
+        __asm volatile{ smulbb f16MinMul1, f16MinMul1, f16MinMul2    /* f16MinMul1 * f16MinMul2 */
+                        smulbb f16SubMul1, f16SubMul1, f16SubMul2    /* f16SubMul1 * f16SubMul2 */
+                        add f16MinMul1, f16MinMul1, #0x4000          /* Rounding */
+                        qsub f16MinMul1, f16MinMul1, f16SubMul1      /* Addition with saturation */
+                        ssat f16MinMul1, #16, f16MinMul1, asr #15 }; /* Result = Result * 2 */
+    #else
+        __asm volatile( "smulbb %0, %0, %2 \n"                       /* f16MinMul1 * f16MinMul2 */
+                        "smulbb %1, %1, %3 \n"                       /* f16SubMul1 * f16SubMul2 */
+                        "add %0, %0, #0x4000 \n"                     /* Rounding */
+                        "qsub %0, %0, %1 \n"                         /* Addition with saturation */
+                        "ssat %0, #16, %0, asr #15 \n"               /* Result = Result * 2 */
+                        : "+l"(f16MinMul1), "+l"(f16SubMul1): "l"(f16MinMul2), "l"(f16SubMul2));
+    #endif
+
+    return f16MinMul1;
+}
+
+
+#if defined(__cplusplus)
+}
+#endif
+
+#endif /* _MLIB_MSU4RND_F16_ASM_H_ */
