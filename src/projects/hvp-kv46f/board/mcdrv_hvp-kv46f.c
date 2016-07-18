@@ -83,37 +83,30 @@ void InitPWMA(void)
     PWM_WR_INIT(PWMA, 0, (uint16_t)(-(M1_PWM_MODULO/2)));
     PWM_WR_INIT(PWMA, 1, (uint16_t)(-(M1_PWM_MODULO/2)));
     PWM_WR_INIT(PWMA, 2, (uint16_t)(-(M1_PWM_MODULO/2)));
-    PWM_WR_INIT(PWMA, 3, (uint16_t)(-(M1_PWM_MODULO/2)));
     
     PWM_WR_VAL0(PWMA, 0, (uint16_t)(0));
     PWM_WR_VAL0(PWMA, 1, (uint16_t)(0));
     PWM_WR_VAL0(PWMA, 2, (uint16_t)(0));
-    PWM_WR_VAL0(PWMA, 3, (uint16_t)(0));
     
     PWM_WR_VAL1(PWMA, 0, (uint16_t)((M1_PWM_MODULO/2)-1));
     PWM_WR_VAL1(PWMA, 1, (uint16_t)((M1_PWM_MODULO/2)-1));
     PWM_WR_VAL1(PWMA, 2, (uint16_t)((M1_PWM_MODULO/2)-1));
-    PWM_WR_VAL1(PWMA, 3, (uint16_t)((M1_PWM_MODULO/2)-1));
     
     PWM_WR_VAL2(PWMA, 0, (uint16_t)(-(M1_PWM_MODULO/4)));
     PWM_WR_VAL2(PWMA, 1, (uint16_t)(-(M1_PWM_MODULO/4)));
     PWM_WR_VAL2(PWMA, 2, (uint16_t)(-(M1_PWM_MODULO/4)));
-    PWM_WR_VAL2(PWMA, 3, (uint16_t)(-(M1_PWM_MODULO/4)));
     
     PWM_WR_VAL3(PWMA, 0, (uint16_t)((M1_PWM_MODULO/4)));
     PWM_WR_VAL3(PWMA, 1, (uint16_t)((M1_PWM_MODULO/4)));
     PWM_WR_VAL3(PWMA, 2, (uint16_t)((M1_PWM_MODULO/4)));
-    PWM_WR_VAL3(PWMA, 3, (uint16_t)((M1_PWM_MODULO/4)));
     
-    PWM_WR_VAL4(PWMA, 0, (uint16_t)(0)); /* ADCA trigger */
+    PWM_WR_VAL4(PWMA, 0, (uint16_t)(0));
     PWM_WR_VAL4(PWMA, 1, (uint16_t)(0));
     PWM_WR_VAL4(PWMA, 2, (uint16_t)(0));
-    PWM_WR_VAL4(PWMA, 3, (uint16_t)(0));
     
     PWM_WR_VAL5(PWMA, 0, (uint16_t)(0)); 
     PWM_WR_VAL5(PWMA, 1, (uint16_t)(0));
     PWM_WR_VAL5(PWMA, 2, (uint16_t)(0));
-    PWM_WR_VAL5(PWMA, 3, (uint16_t)(0));
     
     /* PWMA module 0 trigger on VAL4 enabled for ADC synchronization */
     //PWM_WR_TCTRL_OUT_TRIG_EN(PWMA, 0, (1<<4));
@@ -244,10 +237,10 @@ void InitADC12(void)
     
     /* assign channels and init all pointers */
     MCDRV_Curr3Ph2ShChanAssign(&msM1AdcSensor);
-    msM1AdcSensor.pf16UDcBus     = &gsM1Drive.sFocACIM.f16UDcBusMeas;
-    msM1AdcSensor.psIABC         = &gsM1Drive.sFocACIM.sIABCMeas;
-    msM1AdcSensor.pui16SVMSector = &gsM1Drive.sFocACIM.ui16SectorSVM;
-    msM1AdcSensor.pui16AuxChan   = &gsM1Drive.f16AdcAuxSample;
+    //msM1AdcSensor.pf16UDcBus     = &gsM1Drive.sFocACIM.f16UDcBusMeas;
+    //msM1AdcSensor.psIABC         = &gsM1Drive.sFocACIM.sIABCMeas;
+    //msM1AdcSensor.pui16SVMSector = &gsM1Drive.sFocACIM.ui16SectorSVM;
+    //msM1AdcSensor.pui16AuxChan   = &gsM1Drive.f16AdcAuxSample;
     
     /* enable & setup interrupt from ADC */
     NVIC_EnableIRQ(ADCA_IRQn);                                                  /* enable Interrupt */

@@ -25,7 +25,7 @@ if not "%1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.general.xcl" --backend -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.driver.xcl" 
+"D:\SYSSoft\IAR\common\bin\cspybat" -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.general.xcl" --backend -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.general.xcl" "--debug_file=%1" --backend -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.driver.xcl" 
+"D:\SYSSoft\IAR\common\bin\cspybat" -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.general.xcl" "--debug_file=%1" --backend -f "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\settings\acim_demo_hvp-kv46f.debug.driver.xcl" 
 
 @echo off 
 :end

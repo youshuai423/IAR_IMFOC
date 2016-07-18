@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+
 <workspace>
-<batchBuild><batchDefinition><name>debug</name><member><project>acim_demo_hvp-kv46f</project><configuration/></member></batchDefinition><batchDefinition><name>release</name><member><project>acim_demo_hvp-kv46f</project><configuration/></member></batchDefinition></batchBuild><project><path>$WS_DIR$\acim_demo_hvp-kv46f.ewp</path></project></workspace>
+  <project>
+    <path>$WS_DIR$\acim_demo_hvp-kv46f.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\..\..\..\IAR_FOC\IMFOC.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

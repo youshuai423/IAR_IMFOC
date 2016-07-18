@@ -2856,6 +2856,12 @@
     <file>
       <name>$PROJ_DIR$\..\..\..\src\projects\hvp-kv46f\main.h</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\src\projects\hvp-kv46f\ysADC.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\src\projects\hvp-kv46f\ysADC.h</name>
+    </file>
   </group>
 </project>
 

@@ -62,9 +62,9 @@ C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar/../../../src/common/s
 -I
 C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar/../../../src/common/sdk/devices
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\inc
+D:\SYSSoft\IAR\arm\inc
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\inc\c
+D:\SYSSoft\IAR\arm\inc\c
 -I
 C:\Users\yoush\Desktop\IAR_IMFOC\src\common\meterlib\CM4_4.0\fraclib
 -I
@@ -368,8 +368,8 @@ C:\Users\yoush\Desktop\IAR_IMFOC\src\common\sdk\devices
 -D__EDG_SYSV=0
 -D__EDG_ANSIC=1
 -D__EDG_CPP11_IL_EXTENSIONS_SUPPORTED=1
--D_DLIB_CONFIG_FILE_HEADER_NAME="C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\INC\c\DLib_Config_Normal.h"
--D_DLIB_CONFIG_FILE_STRING="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 7.2\\arm\\INC\\c\\DLib_Config_Normal.h"
+-D_DLIB_CONFIG_FILE_HEADER_NAME="D:\SYSSoft\IAR\arm\INC\c\DLib_Config_Normal.h"
+-D_DLIB_CONFIG_FILE_STRING="D:\\SYSSoft\\IAR\\arm\\INC\\c\\DLib_Config_Normal.h"
 -D__VERSION__="IAR ANSI C/C++ Compiler V7.40.3.8902/W32 for ARM"
 -D_VA_DEFINED=
 -D__CODE_MEMORY_LIST1__()=__CODE_MEM_HELPER1__(__code, 0 )

@@ -13,20 +13,20 @@
 //Motor Parameters                      
 //----------------------------------------------------------------------
 //Pole-pair number                      = 2 [-]
-//Stator resistance                     = 26.06 [Ohms]
-//Rotor resistance                      = 24.85 [Ohms]
-//Stator inductance                     = 0.51 [H]
-//Rotor inductance                      = 0.51 [H]
-//Mutual inductance                     = 0.47 [H]
+//Stator resistance                     = 4.6 [Ohms]
+//Rotor resistance                      = 3.3278 [Ohms]
+//Stator inductance                     = 0.289368 [H]
+//Rotor inductance                      = 0.289368 [H]
+//Mutual inductance                     = 0.27325 [H]
 //Drive inertia                         = 0.000016 [kg.m2]
-//Nominal current                       = 0.9 [A]
+//Nominal current                       = 3.7 [A]
 
 #define M1_MOTOR_PP                        (2)
-#define M1_R_S                             (26.06F)
-#define M1_R_R                             (24.85F)
-#define M1_L_S                             (0.51F)
-#define M1_L_R                             (0.51F)
-#define M1_L_M                             (0.47F)
+#define M1_R_S                             (4.6F)
+#define M1_R_R                             (3.3278F)
+#define M1_L_S                             (0.289368F)
+#define M1_L_R                             (0.289368F)
+#define M1_L_M                             (0.0.27325F)
 #define M1_T_R                             M1_L_R / M1_R_R
 #define M1_T_S                             M1_L_S / M1_R_S
 #define M1_PI_CNST                         (3.141592653589793F)

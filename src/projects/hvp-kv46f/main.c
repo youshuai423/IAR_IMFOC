@@ -12,6 +12,7 @@ int Tinv[3] = {0, 0, 0};  // 三相对应比较值
 int last[3];  // 上周期Tinv值(for test)
 double Dm = 0, Dn = 0, D0 = 0;  // 占空比
 
+void ualbeSVM(double Ual, double Ube, double Ud, unsigned int *Tinv);
 double roundn(double);  // 截断小数点后位数
 
 void main(void)
@@ -27,6 +28,7 @@ void main(void)
     /* initialize peripheral motor control driver for motor M1 */
     MCDRV_Init_M1();      
     
+    //Init_ADC();
     //Init_PIT();
 
     /* enable interrupts  */
@@ -87,6 +89,13 @@ void PWMA_RELOAD0_IRQHandler(void)
       Tinv[1] = period - floor(period * (D0 + Dm + Dn));
       Tinv[2] = period - floor(period * (D0 + Dn));
     }
+ 
+  
+  /*  double Ud = 60;
+    double ual = 55 * cos(2*pi*10 * (period_count/1000.0));
+    double ube = 55 * cos(2*pi*10 * (period_count/1000.0) - 0.5*pi);
+    
+    ualbeSVM(ual, ube, Ud, Tinv);
     
     PWM_WR_VAL2(PWMA, 0, -Tinv[0]);
     PWM_WR_VAL2(PWMA, 1, -Tinv[1]);
@@ -94,7 +103,7 @@ void PWMA_RELOAD0_IRQHandler(void)
     
     PWM_WR_VAL3(PWMA, 0, Tinv[0]);
     PWM_WR_VAL3(PWMA, 1, Tinv[1]);
-    PWM_WR_VAL3(PWMA, 2, Tinv[2]);
+    PWM_WR_VAL3(PWMA, 2, Tinv[2]); */
     
     period_count++;
     if (period_count > 1000) 
@@ -129,4 +138,116 @@ double roundn(double input)
   temp = floor(temp);
   temp = temp / digit;
   return temp;
+}
+
+void ualbeSVM(double Ual, double Ube, double Ud, unsigned int *Tinv)
+{
+  double dm, dn, d0;
+  int sector;
+  double k = Ube / Ual;
+  
+  if (Ual > 0 && Ube >= 0 && k >= 0 && k < sqrt(3))
+  {
+    sector = 1;
+    dm = (Ual - Ube/sqrt(3)) / Ud;
+    dn = 2/sqrt(3) * Ube / Ud;
+  }
+  else if (Ube > 0 && (k >= sqrt(3) || k < -sqrt(3)))
+  {
+    sector = 2;
+    dm = (Ual + Ube/sqrt(3)) / Ud;
+    dn = (-Ual - Ube/sqrt(3)) / Ud;
+  }
+  else if (Ual < 0 && Ube > 0 && k >= -sqrt(3) && k < 0)
+  {
+    sector = 3;
+    dm = 2/sqrt(3) * Ual / Ud;
+    dn = (-Ual - Ube/sqrt(3)) / Ud;
+  }
+  else if (Ual < 0 && Ube <= 0 && k >= 0 && k < sqrt(3))
+  { 
+    sector = 4;
+    dm = (-Ual + Ube/sqrt(3)) / Ud;
+    dn = -2/sqrt(3) * Ube / Ud;
+  }
+  else if (Ube < 0 && (k >= sqrt(3) || k < -sqrt(3)))
+  {
+    sector = 5;
+    dm = (-Ual - Ube/sqrt(3)) / Ud;
+    dn = (Ual - Ube/sqrt(3)) / Ud;
+  }
+  else if (Ual > 0 && Ube < 0 && k >= -sqrt(3) && k < 0)
+  {
+    sector = 6;
+    dm = -2/sqrt(3) * Ube / Ud;
+    dn = (Ual + Ube/sqrt(3)) / Ud;
+  }
+  else
+  {
+    sector = 1;
+    dm = 0;
+    dn = 0;
+  }
+  
+  if (dm + dn >= 1)
+  {
+    double temp = dm / (dm + dn);
+    dn = dn / (dm + dn);
+    dm = temp;
+    d0 = 0;
+  }
+  else
+    d0 = 0.5 * (1 - dm - dn);
+  
+  switch (sector)
+  {
+  case 1:
+    {      
+      Tinv[0] = (int)floor(period * (dm + dn + d0));
+      Tinv[1] = (int)floor(period * (dn + d0));
+      Tinv[2] = (int)floor(period * d0);
+      break;
+    }
+  case 2:
+    {
+      Tinv[0] = (int)floor(period * (dm + d0));
+      Tinv[1] = (int)floor(period * (dm + dn + d0));
+      Tinv[2] = (int)floor(period * d0);
+      break;
+    }
+  case 3:
+    {
+      Tinv[0] = (int)floor(period * (d0));
+      Tinv[1] = (int)floor(period * (dm + dn + d0));
+      Tinv[2] = (int)floor(period * (dn + d0));
+      break;
+    }
+  case 4:
+    {
+      Tinv[0] = (int)floor(period * (d0));
+      Tinv[1] = (int)floor(period * (dm + d0));
+      Tinv[2] = (int)floor(period * (dm + dn + d0));
+      break;
+    }
+  case 5:
+    {
+      Tinv[0] = (int)floor(period * (dn + d0));
+      Tinv[1] = (int)floor(period * (d0));
+      Tinv[2] = (int)floor(period * (dm + dn + d0));
+      break;
+    }
+  case 6:
+    {
+      Tinv[0] = (int)floor(period * (dm + dn + d0));
+      Tinv[1] = (int)floor(period * (d0));
+      Tinv[2] = (int)floor(period * (dm + d0));
+      break;
+    }
+  default:
+    {
+      Tinv[0] = period + 1;
+      Tinv[1] = period + 1;
+      Tinv[2] = period + 1;
+    }
+  }
 }

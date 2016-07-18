@@ -1,14 +1,14 @@
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armproc.dll" 
+"D:\SYSSoft\IAR\arm\bin\armproc.dll" 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armjlink.dll" 
+"D:\SYSSoft\IAR\arm\bin\armjlink.dll" 
 
 "C:\Users\yoush\Desktop\IAR_IMFOC\build_demos\hvp-kv46f\iar\debug\acim_demo.out" 
 
---plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armbat.dll" 
+--plugin "D:\SYSSoft\IAR\arm\bin\armbat.dll" 
 
---device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\config\debugger\Freescale\Kinetis.dmac" 
+--device_macro "D:\SYSSoft\IAR\arm\config\debugger\Freescale\Kinetis.dmac" 
 
---flash_loader "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\config\flashloader\Freescale\FlashKV4x24K.board" 
+--flash_loader "D:\SYSSoft\IAR\arm\config\flashloader\Freescale\FlashKV4x24K.board" 
 
 
 
